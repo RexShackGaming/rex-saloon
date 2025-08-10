@@ -1,0 +1,88 @@
+    valsaloon = {
+        label = 'Valentine Saloon',
+        type = 'saloon',
+        defaultDuty = false,
+        offDutyPay = false,
+        grades = {
+            ['0'] = { name = 'Recruit', payment = 10 },
+            ['1'] = { name = 'Tender', payment = 15 },
+            ['2'] = { name = 'Manager', isboss = true, payment = 25 },
+        },
+    },
+    blasaloon = {
+        label = 'Blackwater Saloon',
+        type = 'saloon',
+        defaultDuty = false,
+        offDutyPay = false,
+        grades = {
+            ['0'] = { name = 'Recruit', payment = 10 },
+            ['1'] = { name = 'Tender', payment = 15 },
+            ['2'] = { name = 'Manager', isboss = true, payment = 25 },
+        },
+    },
+    rhosaloon = {
+        label = 'Rhodes Saloon',
+        type = 'saloon',
+        defaultDuty = false,
+        offDutyPay = false,
+        grades = {
+            ['0'] = { name = 'Recruit', payment = 10 },
+            ['1'] = { name = 'Tender', payment = 15 },
+            ['2'] = { name = 'Manager', isboss = true, payment = 25 },
+        },
+    },
+    doysaloon = {
+        label = 'Doyles Taven',
+        type = 'saloon',
+        defaultDuty = false,
+        offDutyPay = false,
+        grades = {
+            ['0'] = { name = 'Recruit', payment = 10 },
+            ['1'] = { name = 'Tender', payment = 15 },
+            ['2'] = { name = 'Manager', isboss = true, payment = 25 },
+        },
+    },
+    bassaloon = {
+        label = 'Bastille Saloon',
+        type = 'saloon',
+        defaultDuty = false,
+        offDutyPay = false,
+        grades = {
+            ['0'] = { name = 'Recruit', payment = 10 },
+            ['1'] = { name = 'Tender', payment = 15 },
+            ['2'] = { name = 'Manager', isboss = true, payment = 25 },
+        },
+    },
+    oldsaloon = {
+        label = 'Old Light Saloon',
+        type = 'saloon',
+        defaultDuty = false,
+        offDutyPay = false,
+        grades = {
+            ['0'] = { name = 'Recruit', payment = 10 },
+            ['1'] = { name = 'Tender', payment = 15 },
+            ['2'] = { name = 'Manager', isboss = true, payment = 25 },
+        },
+    },
+    armsaloon = {
+        label = 'Armadillo Saloon',
+        type = 'saloon',
+        defaultDuty = false,
+        offDutyPay = false,
+        grades = {
+            ['0'] = { name = 'Recruit', payment = 10 },
+            ['1'] = { name = 'Tender', payment = 15 },
+            ['2'] = { name = 'Manager', isboss = true, payment = 25 },
+        },
+    },
+    tumsaloon = {
+        label = 'Tumbleweed Saloon',
+        type = 'saloon',
+        defaultDuty = false,
+        offDutyPay = false,
+        grades = {
+            ['0'] = { name = 'Recruit', payment = 10 },
+            ['1'] = { name = 'Tender', payment = 15 },
+            ['2'] = { name = 'Manager', isboss = true, payment = 25 },
+        },
+    },
