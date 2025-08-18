@@ -3,11 +3,12 @@ Config = {}
 ---------------------------------
 -- settings
 ---------------------------------
-Config.Keybind         = 'J'
-Config.Img             = "rsg-inventory/html/images/"
-Config.Money           = 'cash' -- 'cash', 'bank' or 'bloodmoney'
-Config.ServerNotify    = true
-Config.LicenseRequired = false
+Config.Keybind          = 'J'
+Config.Img              = "rsg-inventory/html/images/"
+Config.Money            = 'cash' -- 'cash', 'bank' or 'bloodmoney'
+Config.ServerNotify     = true
+Config.EnableRentSystem = true
+Config.LicenseRequired  = false
 
 ---------------------------------
 -- rent settings

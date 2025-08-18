@@ -290,6 +290,11 @@ end)
 ---------------------------------------------
 lib.cron.new(Config.SaloonCronJob, function ()
 
+    if not Config.EnableRentSystem then
+        print(locale('sv_lang_11'))
+        return
+    end
+
     local result = MySQL.query.await('SELECT * FROM rex_saloon')
 
     if not result then goto continue end

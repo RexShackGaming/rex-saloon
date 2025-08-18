@@ -58,5 +58,6 @@
     "sv_lang_7" : "Resets a Saloon (Admin Only)",
     "sv_lang_8" : "Name of the saloon to reset",
     "sv_lang_9" : "Saloon Reset Complete",
-    "sv_lang_10" : "Saloon with that ID not found!"
+    "sv_lang_10" : "Saloon with that ID not found!",
+    "sv_lang_11" : "no rent system enabled"
 }

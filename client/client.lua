@@ -19,27 +19,99 @@ end)
 -- get correct menu
 ---------------------------------------------
 RegisterNetEvent('rex-saloon:client:opensaloon', function(saloonid, jobaccess, name, rentprice)
-    RSGCore.Functions.TriggerCallback('rex-saloon:server:getsaloondata', function(result)
-        local owner = result[1].owner
-        local status = result[1].status
-        if owner ~= 'vacant' then
-            local PlayerData = RSGCore.Functions.GetPlayerData()
-            local playerjob = PlayerData.job.name
-            if playerjob == jobaccess then
-                TriggerEvent('rex-saloon:client:openjobmenu', saloonid, status)
-            else
-                TriggerEvent('rex-saloon:client:opencustomermenu', saloonid, status)
-            end
+    if not Config.EnableRentSystem then
+        local PlayerData = RSGCore.Functions.GetPlayerData()
+        local playerjob = PlayerData.job.name
+        if playerjob == jobaccess then
+            TriggerEvent('rex-saloon:client:openjobmenu', weaponsmithid, status)
         else
-            TriggerEvent('rex-saloon:client:rentsaloon', saloonid, name, rentprice)
+            TriggerEvent('rex-saloon:client:opencustomermenu', weaponsmithid, status)
         end
-    end, saloonid)
+    else
+        RSGCore.Functions.TriggerCallback('rex-saloon:server:getsaloondata', function(result)
+            local owner = result[1].owner
+            local status = result[1].status
+            if owner ~= 'vacant' then
+                local PlayerData = RSGCore.Functions.GetPlayerData()
+                local playerjob = PlayerData.job.name
+                if playerjob == jobaccess then
+                    TriggerEvent('rex-saloon:client:openrentjobmenu', saloonid, status)
+                else
+                    TriggerEvent('rex-saloon:client:opencustomermenu', saloonid, status)
+                end
+            else
+                TriggerEvent('rex-saloon:client:rentsaloon', saloonid, name, rentprice)
+            end
+        end, saloonid)
 end)
 
 ---------------------------------------------
--- saloon job menu
+-- saloon job menu (non rent)
 ---------------------------------------------
 RegisterNetEvent('rex-saloon:client:openjobmenu', function(saloonid, status)
+    lib.registerContext({
+        id = 'job_menu',
+        title = locale('cl_lang_1'),
+        options = {
+            {
+                title = locale('cl_lang_2'),
+                icon = 'fa-solid fa-store',
+                event = 'rex-saloon:client:ownerviewitems',
+                args = { saloonid = saloonid },
+                arrow = true
+            },
+            {
+                title = locale('cl_lang_3'),
+                icon = 'fa-solid fa-circle-plus',
+                iconColor = 'green',
+                event = 'rex-saloon:client:newstockitem',
+                args = { saloonid = saloonid },
+                arrow = true
+            },
+            {
+                title = locale('cl_lang_4'),
+                icon = 'fa-solid fa-circle-minus',
+                iconColor = 'red',
+                event = 'rex-saloon:client:removestockitem',
+                args = { saloonid = saloonid },
+                arrow = true
+            },
+            {
+                title = locale('cl_lang_5'),
+                icon = 'fa-solid fa-sack-dollar',
+                event = 'rex-saloon:client:withdrawmoney',
+                args = { saloonid = saloonid },
+                arrow = true
+            },
+            {
+                title = locale('cl_lang_6'),
+                icon = 'fa-solid fa-box',
+                event = 'rex-saloon:client:ownerstoragemenu',
+                args = { saloonid = saloonid },
+                arrow = true
+            },
+            {
+                title = locale('cl_lang_7'),
+                icon = 'fa-solid fa-box',
+                event = 'rex-saloon:client:craftingmenu',
+                args = { saloonid = saloonid },
+                arrow = true
+            },
+            {
+                title = locale('cl_lang_9'),
+                icon = 'fa-solid fa-user-tie',
+                event = 'rsg-bossmenu:client:mainmenu',
+                arrow = true
+            },
+        }
+    })
+    lib.showContext('job_menu')
+end)
+
+---------------------------------------------
+-- saloon job menu (rent)
+---------------------------------------------
+RegisterNetEvent('rex-saloon:client:openrentjobmenu', function(saloonid, status)
     if status == 'open' then
         lib.registerContext({
             id = 'job_menu',
