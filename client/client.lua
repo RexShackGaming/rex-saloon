@@ -23,9 +23,9 @@ RegisterNetEvent('rex-saloon:client:opensaloon', function(saloonid, jobaccess, n
         local PlayerData = RSGCore.Functions.GetPlayerData()
         local playerjob = PlayerData.job.name
         if playerjob == jobaccess then
-            TriggerEvent('rex-saloon:client:openjobmenu', weaponsmithid, status)
+            TriggerEvent('rex-saloon:client:openjobmenu', saloonid)
         else
-            TriggerEvent('rex-saloon:client:opencustomermenu', weaponsmithid, status)
+            TriggerEvent('rex-saloon:client:opencustomermenu', saloonid)
         end
     else
         RSGCore.Functions.TriggerCallback('rex-saloon:server:getsaloondata', function(result)
@@ -43,6 +43,7 @@ RegisterNetEvent('rex-saloon:client:opensaloon', function(saloonid, jobaccess, n
                 TriggerEvent('rex-saloon:client:rentsaloon', saloonid, name, rentprice)
             end
         end, saloonid)
+    end
 end)
 
 ---------------------------------------------
