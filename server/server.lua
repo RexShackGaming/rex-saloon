@@ -107,14 +107,21 @@ end)
 ---------------------------------------------
 RegisterNetEvent('rex-saloon:server:buyitem', function(amount, item, newstock, price, label, saloonid)
     local src = source
+
+    if amount <= 0 then
+        TriggerClientEvent('ox_lib:notify', src, {title = locale('sv_invalid_amount'), type = 'error', duration = 7000 })
+        return
+    end
+
     local Player = RSGCore.Functions.GetPlayer(src)
     local money = Player.PlayerData.money[Config.Money]
     local totalcost = (price * amount)
     if money >= totalcost then
         MySQL.update('UPDATE rex_saloon_stock SET stock = ? WHERE saloonid = ? AND item = ?', {newstock, saloonid, item})
         Player.Functions.RemoveMoney(Config.Money, totalcost)
-        Player.Functions.AddItem(item, amount)
-        TriggerClientEvent('rsg-inventory:client:ItemBox', src, RSGCore.Shared.Items[item], 'add', amount)
+        if Player.Functions.AddItem(item, amount) then
+            TriggerClientEvent('rsg-inventory:client:ItemBox', src, RSGCore.Shared.Items[item], 'add', amount)
+        end
         MySQL.query('SELECT * FROM rex_saloon WHERE saloonid = ?', { saloonid }, function(data2)
             local moneyupdate = (data2[1].money + totalcost)
             MySQL.update('UPDATE rex_saloon SET money = ? WHERE saloonid = ?',{moneyupdate, saloonid})
