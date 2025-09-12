@@ -60,5 +60,10 @@
     "sv_lang_9" : "Saloon Reset Complete",
     "sv_lang_10" : "Saloon with that ID not found!",
     "sv_lang_11" : "no rent system enabled",
-    "sv_invalid_amount" : "Invalid item amount"
+    "sv_stock_not_found" : "Invalid salon stock.",
+    "sv_not_enough_in_stock" : "Not enough items in stock!",
+    "sv_no_item" : "You don't have enough items.",
+    "sv_not_saloon_owner" : "You are not a salon owner.",
+    "sv_not_enough_money" : "Insufficient funds!",
+    "saloon_already_rented" : "This salon is already rented by someone!"
 }

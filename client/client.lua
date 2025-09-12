@@ -524,7 +524,7 @@ RegisterNetEvent('rex-saloon:client:buyitem', function(data)
     
     if data.stock >= amount then
         local newstock = (data.stock - amount)
-        TriggerServerEvent('rex-saloon:server:buyitem', amount, data.item, newstock, data.price, data.label, data.saloonid)
+        TriggerServerEvent('rex-saloon:server:buyitem', amount, data.item, data.saloonid)
     else
         lib.notify({ title = locale('cl_lang_32'), type = 'error', duration = 7000 })
     end
