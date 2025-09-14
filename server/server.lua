@@ -40,8 +40,26 @@ end, 'admin')
 function isPlayerSaloonOwner(src, saloonid)
     local Player = RSGCore.Functions.GetPlayer(src)
     if not Player then return false end
-    local result = MySQL.query.await('SELECT * FROM rex_saloon WHERE owner = ? AND saloonid = ?', { Player.PlayerData.citizenid, saloonid})
-    return result[1] ~= nil
+    local jobaccess = nil
+    for k,v in ipairs(Config.PlayerSaloonLocations) do
+        if v.saloonid == saloonid then
+            jobaccess = v.jobaccess
+            break
+        end
+    end
+    return jobaccess ~= nil and Player.PlayerData.job.name == jobaccess and Player.PlayerData.job.grade.level == 2
+end
+function isPlayerSaloonWorker(src, saloonid)
+    local Player = RSGCore.Functions.GetPlayer(src)
+    if not Player then return false end
+    local jobaccess = nil
+    for k,v in ipairs(Config.PlayerSaloonLocations) do
+        if v.saloonid == saloonid then
+            jobaccess = v.jobaccess
+            break
+        end
+    end
+    return jobaccess ~= nil and Player.PlayerData.job.name == jobaccess
 end
 function countOwnedSaloons(src)
     local Player = RSGCore.Functions.GetPlayer(src)
@@ -92,8 +110,8 @@ RegisterNetEvent('rex-saloon:server:newstockitem', function(saloonid, item, amou
     local src = source
     local Player = RSGCore.Functions.GetPlayer(src)
 
-    if not isPlayerSaloonOwner(src, saloonid) then
-        TriggerClientEvent('ox_lib:notify', src, {title = locale('sv_not_saloon_owner'), type = 'error', duration = 7000 })
+    if not isPlayerSaloonWorker(src, saloonid) then
+        TriggerClientEvent('ox_lib:notify', src, {title = locale('sv_not_saloon_worker'), type = 'error', duration = 7000 })
         return
     end
 
@@ -188,8 +206,8 @@ RegisterNetEvent('rex-saloon:server:removestockitem', function(data)
     local src = source
     local Player = RSGCore.Functions.GetPlayer(src)
 
-    if not isPlayerSaloonOwner(src, data.saloonid) then
-        TriggerClientEvent('ox_lib:notify', src, {title = locale('sv_not_saloon_owner'), type = 'error', duration = 7000 })
+    if not isPlayerSaloonWorker(src, data.saloonid) then
+        TriggerClientEvent('ox_lib:notify', src, {title = locale('sv_not_saloon_worker'), type = 'error', duration = 7000 })
         return
     end
 
@@ -284,8 +302,8 @@ RegisterNetEvent('rex-saloon:server:addrentmoney', function(rentmoney, saloonid)
     local src = source
     local Player = RSGCore.Functions.GetPlayer(src)
 
-    if not isPlayerSaloonOwner(src, saloonid) then
-        TriggerClientEvent('ox_lib:notify', src, {title = locale('sv_not_saloon_owner'), type = 'error', duration = 7000 })
+    if not isPlayerSaloonWorker(src, saloonid) then
+        TriggerClientEvent('ox_lib:notify', src, {title = locale('sv_not_saloon_worker'), type = 'error', duration = 7000 })
         return
     end
 
@@ -372,8 +390,8 @@ RegisterServerEvent('rex-saloon:server:storagebrewing', function(saloonid)
     local Player = RSGCore.Functions.GetPlayer(src)
     if not Player then return end
 
-    if not isPlayerSaloonOwner(src, saloonid) then
-        TriggerClientEvent('ox_lib:notify', src, {title = locale('sv_not_saloon_owner'), type = 'error', duration = 7000 })
+    if not isPlayerSaloonWorker(src, saloonid) then
+        TriggerClientEvent('ox_lib:notify', src, {title = locale('sv_not_saloon_worker'), type = 'error', duration = 7000 })
         return
     end
 
@@ -390,8 +408,8 @@ RegisterServerEvent('rex-saloon:server:storagestock', function(saloonid)
     local Player = RSGCore.Functions.GetPlayer(src)
     if not Player then return end
 
-    if not isPlayerSaloonOwner(src, saloonid) then
-        TriggerClientEvent('ox_lib:notify', src, {title = locale('sv_not_saloon_owner'), type = 'error', duration = 7000 })
+    if not isPlayerSaloonWorker(src, saloonid) then
+        TriggerClientEvent('ox_lib:notify', src, {title = locale('sv_not_saloon_worker'), type = 'error', duration = 7000 })
         return
     end
 
